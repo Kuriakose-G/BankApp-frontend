@@ -1,0 +1,41 @@
+                    BankApp
+
+1. Create a project: ng new BankApp
+
+2. Run the application: ng s --o
+
+3. Clear the code from "app.component.html"
+
+4. Include third party libraries: Bootstrap, Font Awesome, Google Fonts
+
+5. Generate components: 
+              ->Login:- ng g c login
+              ->Register:- ng g c register
+              ->Dashboard:- ng g c dashboard
+              ->Transaction:- ng g c transaction
+              ->Page not found:- ng g c pagenotfound
+
+6. Setup path for each component in "app.routing.module.ts"
+
+7. Design Register and Login components
+
+8. Validation for forms:
+              ->Angular Forms:- Reactive Forms:-- To apply user input validations
+                     ->>Import it in "app.module.ts"
+                       
+                     ->>Reactive Forms:--> Form Group (in ts)
+                                   --> Form Array (in ts)
+                                   --> Form Controller (in html) 
+
+------------------------------API CALL---------------------------------
+
+9. Create a service:- "ng g s services/api"
+              ->To make api call
+
+10. Api call:- httpClientModule (import in "app.module.ts")
+
+11. Dependency injection:-
+              ->To share data between components
+              ->eg: api.service --to-- register component
+
+->>>To convert table into pdf file install - "npm i jspdf jspdf-autotable"

@@ -1,0 +1,70 @@
+<!-- Navbar -->
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/000/348/687/original/bank-vector-icon.jpg"
+          class="me-2"
+          height="40"
+          alt=""
+          loading="lazy"
+        />
+        <small>BIT Bank</small>
+      </a>
+    </div>
+  </nav>
+
+  <!-- register loading -->
+  <div *ngIf="regSuccessLoading" class="container text-center m-5 p-5 ">
+     <h3>Your data is getting registered......please wait <img src="https://media.giphy.com/media/w7jtVnXxMOq08/giphy.gif" alt=""></h3>
+  </div>
+
+<!-- Main content -->
+<div *ngIf="!regSuccessLoading" class="container">
+    <div class="row">
+        <div class="col-6">
+            <img src="https://i.pinimg.com/originals/0b/a7/7f/0ba77fb3e72470430dbc7bd56cd8eb09.jpg" alt="" width="100%">
+        </div>
+        <div class="col-6">
+            <h1 class="m-5 text-center fs-1">Register Now</h1>
+            <form [formGroup]="registerForm" (ngSubmit)="register()" class="m-5 mt-5 border rounded shadow p-5">
+                <div class="form-floating mb-3">
+                    <input name="acno" formControlName="acno" type="email" class="form-control" id="floatingInput" placeholder="132456798">
+                    <label for="floatingInput">Account No</label>
+                    <div *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched" class="text-danger">Invalid Data</div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="username" formControlName="username" type="text" class="form-control" id="floatingUser" placeholder="User Name">
+                    <label for="floatingUser">User Name</label>
+                    <div *ngIf="this.registerForm.get('username')?.errors && this.registerForm.get('username')?.touched" class="text-danger">Invalid Data</div>
+
+                  </div>
+                  <div class="form-floating">
+                    <input name="password" formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                    <div *ngIf="this.registerForm.get('password')?.errors && this.registerForm.get('password')?.touched" class="text-danger">Invalid Data</div>
+
+                  </div>
+                  <!-- register error message -->
+                  <div>
+                    <h4 class="text-danger text-center">{{regErrorMsg}}</h4>
+                  </div>
+
+                  <button class="mt-3 form-control bg-success text-white" type="submit">Register</button>
+                  <a routerLink="" style="float: right;">Already has an account? Click here!</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+<footer class="text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="#">BIT Bank</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

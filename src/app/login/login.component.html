@@ -1,0 +1,69 @@
+<!-- Navbar -->
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-warning">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://static.vecteezy.com/system/resources/previews/000/348/687/original/bank-vector-icon.jpg"
+        class="me-2" height="40" alt="" loading="lazy" />
+      <small>BIT Bank</small>
+    </a>
+  </div>
+</nav>
+
+<!-- Main content -->
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <img src="https://i.pinimg.com/originals/0b/a7/7f/0ba77fb3e72470430dbc7bd56cd8eb09.jpg" alt="" width="100%" />
+    </div>
+    <div class="col-6">
+      <h1 class="m-5 text-center fs-1">Login</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="m-5 mt-5 border rounded shadow p-5">
+        <div class="form-floating mb-3">
+          <input name="acno" formControlName="acno" type="email" class="form-control" id="floatingInput"
+            placeholder="132456798" />
+          <label for="floatingInput">Account No</label>
+          <div *ngIf="
+              this.loginForm.get('acno')?.errors &&
+              this.loginForm.get('acno')?.touched
+            " class="text-danger">
+            Invalid Data
+          </div>
+        </div>
+        <div class="form-floating">
+          <input name="password" formControlName="password" type="password" class="form-control" id="floatingPassword"
+            placeholder="Password" />
+          <label for="floatingPassword">Password</label>
+          <div *ngIf="
+              this.loginForm.get('password')?.errors &&
+              this.loginForm.get('password')?.touched
+            " class="text-danger">
+            Invalid Data
+          </div>
+        </div>
+
+        <div class="text-center text-danger fw-bolder">
+          {{ loginErrorMsg }}
+        </div>
+        <button class="mt-3 mb-3 form-control bg-success text-white" type="submit">
+          Log In
+          <div *ngIf="loginSuccessStatus" class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </button>
+
+        <a routerLink="/register" style="float: right">New here? Create an account!</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<footer class="text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2020 Copyright:
+    <a class="text-dark" href="#">BIT Bank</a>
+  </div>
+  <!-- Copyright -->
+</footer>

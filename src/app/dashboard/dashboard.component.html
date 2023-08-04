@@ -1,0 +1,183 @@
+<!-- Navbar -->
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand">
+        <img src="https://static.vecteezy.com/system/resources/previews/000/348/687/original/bank-vector-icon.jpg"
+          class="me-2" height="40" alt="" loading="lazy" />
+        <small>BIT Bank</small>
+      </a>
+      
+      <nav style="margin-right: 60px;" class="navbar navbar-expand-lg bg-body-warning border border-light rounded">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Services
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample" (click)="getBalance()">Balance Enquiry <i class="fa-solid fa-headset"></i></a></li>
+                  <li><hr class=""></li>
+                  <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Fund Transfer <i class="fa-solid fa-money-bill-transfer"></i></a></li>
+                  <li><hr class=""></li>
+                  <li><a class="dropdown-item" routerLink="/transactions">Transaction History </a></li>
+                  <li><hr class=""></li>
+                  <li><a class="dropdown-item" (click)="deleteAccount()">Remove Account</a></li>
+                  <li><hr class=""></li>
+                  <li><a class="dropdown-item" (click)="logout()">LogOut <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </nav>
+  <!-- <marquee class="blink">This is an example of blinking text using CSS within a marquee.</marquee> -->
+
+
+
+<!-- offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-titler" id="offcanvasExampleLabel"> Balance Enquiry</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <img width="100%" style="margin-bottom: 30px;"  src="https://th.bing.com/th/id/OIP.XEKbsiC1h9FEYj1uYcb3EAHaGB?pid=ImgDet&rs=1" alt="">
+    </div>
+    <div>
+      <h1 class="mt-3 mb-3">Hi {{user}}</h1>
+      <h5 >Your current balance : <span class="text-success fw-bolder">{{balance}}</span> </h5>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Transfer Funds</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form [formGroup]="transferForm" (ngSubmit)="fundTransfer()">
+          <!-- credit account number -->
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="acno" formControlName="acno" placeholder="258741369">
+            <label for="floatingInput">Credit Account Number</label>
+            <div *ngIf="
+              this.transferForm.get('acno')?.errors &&
+              this.transferForm.get('acno')?.touched
+            " class="text-danger">
+            Invalid Data
+          </div>
+          </div>
+          <!-- user password -->
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="password" formControlName="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            <div *ngIf="
+              this.transferForm.get('password')?.errors &&
+              this.transferForm.get('password')?.touched
+            " class="text-danger">
+            Invalid Data
+          </div>
+          </div>
+          <!-- amount -->
+          <div class="form-floating">
+            <input type="text" class="form-control" name="amount" formControlName="amount" placeholder="💵">
+            <label for="floatingPassword">Amount</label>
+            <div *ngIf="
+              this.transferForm.get('amount')?.errors &&
+              this.transferForm.get('amount')?.touched
+            " class="text-danger">
+            Invalid Data
+          </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="mt-2 text-success text-center fw-bolder"> {{transferSuccess}}</div>
+      <div class="mt-2 text-danger text-center fw-bolder"> {{transferError}}</div>
+
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+        <button type="button" class="btn btn-primary" (click)="fundTransfer()">Transfer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="width: 100%; height: 840px;" *ngIf="logoutStatus">
+  <h1 class="m-5 p-5 text-center">Please Wait.. While you are logging out... 
+   <div class="spinner-grow text-warning" role="status">
+   <span class="visually-hidden">Loading...</span>
+ </div>
+</h1>
+ </div>
+
+ <div style="width: 100%; height: 840px;" *ngIf="deleteSuccessStatus">
+  <h1 class="m-5 p-5 text-center">
+    {{deleteSuccessStatus}}
+   <div class="spinner-grow text-warning" role="status">
+   <span class="visually-hidden">Loading...</span>
+ </div>
+</h1>
+ </div>
+
+
+ <app-delete-account [deleteAcno]="acno" (onCancel)="cancelDeleteAccount()" (onDelete)="deleteFromParent()"></app-delete-account>
+
+
+
+  <!--Main Content -->
+<div class="container" *ngIf="!logoutStatus && !deleteConfirmStatus">
+    <div class="row">
+        <div class="col-4">
+            <!-- Image -->
+            <img width="100%" class="mt-5 mb-5" src="https://i.pinimg.com/originals/5b/ad/f7/5badf72a895a0a9d6ff371ef364d56af.gif" alt="">
+        </div>
+        <div class="col-8">
+            <!-- Content -->
+            <h1 class="mt-3 mb-4" style="text-align: justify;">Welcome {{user}}</h1>
+            <p>Basics of Banking is of foremost importance when it comes to banking awareness or the general awareness section in the bank exams. Basics of banking topic is also important for practical purposes for banking and finance aspirants. Hence, in this article, we have elaborated all the relevant and important information with regards to the basics of banking for candidates to prepare well for the exams.</p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <p style="text-align: justify;">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse officia assumenda nobis porro quia deserunt placeat commodi officiis suscipit dignissimos facere odio dolor eveniet, fugit quae ad rerum architecto libero.
+                    Ea quam molestiae, ducimus impedit aliquid ut sapiente doloribus perferendis earum vero fuga saepe optio ab, quis dolorum explicabo! Ipsum illum iure tenetur? Dolorum, debitis totam temporibus atque ullam magni!
+                    Deserunt sit soluta reiciendis pariatur earum minima odio cupiditate temporibus atque qui quia est, numquam fuga. Accusamus voluptas, commodi quos recusandae expedita modi sit pariatur deserunt alias, aut corporis ea.
+                    Quia quis saepe cum nemo sint enim aspernatur. Sint cupiditate deleniti nihil perspiciatis atque, neque reprehenderit quam. Debitis praesentium possimus temporibus facilis esse, minima ducimus optio mollitia velit obcaecati! Doloribus?
+                    Ut assumenda voluptatem magnam necessitatibus ipsam quam voluptatum id natus et. Vero ea eaque fugiat. Cum porro similique molestias? Sapiente cum delectus similique ea dolor iusto rerum repellendus amet esse.
+                  </p>
+                </div>
+            </div>
+            <button (click)="collapse()" class="btn btn-warning mt-3 mb-3" data-bs-toggle="collapse" data-bs-target="#collapseExample">Read 
+                <span *ngIf="isCollapse">More</span> 
+                <span *ngIf="!isCollapse">Less</span> </button>
+        </div>
+    </div>
+</div>
+
+
+  <!-- footer -->
+<footer class="text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2020 Copyright:
+      <a class="text-dark" href="#">BIT Bank</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

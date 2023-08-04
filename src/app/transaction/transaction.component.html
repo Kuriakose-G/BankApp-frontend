@@ -1,0 +1,64 @@
+<!-- Navbar -->
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://static.vecteezy.com/system/resources/previews/000/348/687/original/bank-vector-icon.jpg"
+          class="me-2" height="40" alt="" loading="lazy" />
+        <small>BIT Bank</small>
+      </a>
+    </div>
+  </nav>
+
+
+<!-- main content -->
+<div class="container">
+    <h1 class="text-center mt-3">Transaction History</h1>
+    <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis pariatur tempore nesciunt voluptatem cupiditate! Mollitia dolor eaque, repellendus laborum dignissimos quam eligendi saepe aliquam quisquam consequatur. Qui corrupti ipsum sed!</p>
+
+    <div class="row">
+        <div class="clo-6">
+            <!-- input tag for seaarching -->
+            <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchTerm">
+        </div>
+        <div class="clo-6">
+            <!-- Button for exporting pdf -->
+            <button (click)="exportPdf()" class="btn btn-warning mt-2" style="float: right;">Export as pdf</button>
+        </div>
+    </div>
+    <!-- table for transaction details -->
+     <p>All Transaction History</p>
+    <table class="mb-5">
+        <thead>
+            <tr class="border border-2">
+                <th  class="border border-2">Ref No</th>
+                <th  class="border border-2">Type</th>
+                <th  class="border border-2">From Account</th>
+                <th  class="border border-2">To Account</th>
+                <th  class="border border-2">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of allTransactions |filter:searchTerm:'type'; let i=index">
+              <td class="border border-2">{{i+1}}</td>
+              <td class="border border-2">{{transaction.type}}</td>
+              <td class="border border-2">{{transaction.fromAcno}}</td>
+              <td class="border border-2">{{transaction.toAcno}}</td>
+              <td class="border border-2">{{transaction.amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+  <!-- footer -->
+  <footer class="text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2020 Copyright:
+      <a class="text-dark" href="#">BIT Bank</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

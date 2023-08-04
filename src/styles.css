@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Mate+SC&display=swap');
+
+p{
+    font-family: 'Mate SC', serif;
+}
+h1{
+    font-family: 'Cinzel Decorative', cursive;
+}
